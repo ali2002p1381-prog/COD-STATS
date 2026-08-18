@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -24,7 +22,9 @@ public class MainActivity extends Activity {
     TextView[] c = new TextView[7];
 
     EditText d1;
+
     TextView e1;
+    TextView f1;
 
     Button themeButton;
     Button resetButton;
@@ -32,9 +32,15 @@ public class MainActivity extends Activity {
     LinearLayout mainLayout;
     TextView tabTitle;
 
+    LinearLayout tableContainer;
+    LinearLayout d1Card;
+    LinearLayout e1Card;
+    LinearLayout f1Card;
+
     SharedPreferences preferences;
 
     boolean darkMode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +56,10 @@ public class MainActivity extends Activity {
 
         darkMode = preferences.getBoolean(
                 "dark_mode",
-                false
+                true
         );
 
         initializeViews();
-
-        createTableBorders();
 
         setupListeners();
 
@@ -68,13 +72,27 @@ public class MainActivity extends Activity {
     private void initializeViews() {
 
         mainLayout = findViewById(R.id.mainLayout);
+
         tabTitle = findViewById(R.id.tabTitle);
 
         themeButton = findViewById(R.id.themeButton);
+
         resetButton = findViewById(R.id.resetButton);
 
+        tableContainer = findViewById(R.id.tableContainer);
+
+        d1Card = findViewById(R.id.d1Card);
+
+        e1Card = findViewById(R.id.e1Card);
+
+        f1Card = findViewById(R.id.f1Card);
+
         d1 = findViewById(R.id.d1);
+
         e1 = findViewById(R.id.e1);
+
+        f1 = findViewById(R.id.f1);
+
 
         players[0] = findViewById(R.id.player1);
         players[1] = findViewById(R.id.player2);
@@ -84,6 +102,7 @@ public class MainActivity extends Activity {
         players[5] = findViewById(R.id.player6);
         players[6] = findViewById(R.id.player7);
 
+
         b[0] = findViewById(R.id.b1);
         b[1] = findViewById(R.id.b2);
         b[2] = findViewById(R.id.b3);
@@ -91,6 +110,7 @@ public class MainActivity extends Activity {
         b[4] = findViewById(R.id.b5);
         b[5] = findViewById(R.id.b6);
         b[6] = findViewById(R.id.b7);
+
 
         c[0] = findViewById(R.id.c1);
         c[1] = findViewById(R.id.c2);
@@ -104,7 +124,7 @@ public class MainActivity extends Activity {
 
     private void setupListeners() {
 
-        TextWatcher calculationWatcher = new TextWatcher() {
+        TextWatcher watcher = new TextWatcher() {
 
             @Override
             public void beforeTextChanged(
@@ -125,22 +145,17 @@ public class MainActivity extends Activity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(
+                    Editable s) {
             }
         };
 
 
-        for (EditText editText : b) {
-
-            editText.addTextChangedListener(
-                    calculationWatcher
-            );
+        for (EditText item : b) {
+            item.addTextChangedListener(watcher);
         }
 
-
-        d1.addTextChangedListener(
-                calculationWatcher
-        );
+        d1.addTextChangedListener(watcher);
 
 
         themeButton.setOnClickListener(
@@ -166,18 +181,14 @@ public class MainActivity extends Activity {
         }
 
         try {
-
             return Integer.parseInt(value);
-
         } catch (NumberFormatException e) {
-
             return 0;
         }
     }
 
 
     private int trunc(double value) {
-
         return (int) value;
     }
 
@@ -187,7 +198,6 @@ public class MainActivity extends Activity {
         int[] B = new int[7];
 
         for (int i = 0; i < 7; i++) {
-
             B[i] = getNumber(b[i]);
         }
 
@@ -200,7 +210,6 @@ public class MainActivity extends Activity {
         int E1 = 0;
 
         for (int value : B) {
-
             E1 += value;
         }
 
@@ -211,8 +220,6 @@ public class MainActivity extends Activity {
 
 
         // C1
-        //
-        // =IF(B1=0,0,TRUNC((B1/E1)*D1,0))
 
         if (B[0] == 0 || E1 == 0) {
 
@@ -227,9 +234,6 @@ public class MainActivity extends Activity {
 
 
         // C2
-        //
-        // =IF(B2=0,0,
-        // TRUNC((B2/SUM(B2:B7))*(D1-SUM(C1:C1)),0))
 
         int sumB2B7 =
                 B[1] +
@@ -253,9 +257,6 @@ public class MainActivity extends Activity {
 
 
         // C3
-        //
-        // =IF(B3=0,0,
-        // TRUNC((B3/SUM(B3:B7))*(D1-SUM(C1:C2)),0))
 
         int sumB3B7 =
                 B[2] +
@@ -278,9 +279,6 @@ public class MainActivity extends Activity {
 
 
         // C4
-        //
-        // =IF(B4=0,0,
-        // TRUNC((B4/SUM(B4:B7))*(D1-SUM(C1:C3)),0))
 
         int sumB4B7 =
                 B[3] +
@@ -296,18 +294,17 @@ public class MainActivity extends Activity {
 
             C[3] = trunc(
                     ((double) B[3] / sumB4B7)
-                            * (D1
-                            - C[0]
-                            - C[1]
-                            - C[2])
+                            * (
+                                    D1
+                                            - C[0]
+                                            - C[1]
+                                            - C[2]
+                            )
             );
         }
 
 
         // C5
-        //
-        // =IF(B5=0,0,
-        // TRUNC((B5/SUM(B5:B7))*(D1-SUM(C1:C4)),0))
 
         int sumB5B7 =
                 B[4] +
@@ -322,19 +319,18 @@ public class MainActivity extends Activity {
 
             C[4] = trunc(
                     ((double) B[4] / sumB5B7)
-                            * (D1
-                            - C[0]
-                            - C[1]
-                            - C[2]
-                            - C[3])
+                            * (
+                                    D1
+                                            - C[0]
+                                            - C[1]
+                                            - C[2]
+                                            - C[3]
+                            )
             );
         }
 
 
         // C6
-        //
-        // =IF(B6=0,0,
-        // TRUNC((B6/SUM(B6:B7))*(D1-SUM(C1:C5)),0))
 
         int sumB6B7 =
                 B[5] +
@@ -348,20 +344,19 @@ public class MainActivity extends Activity {
 
             C[5] = trunc(
                     ((double) B[5] / sumB6B7)
-                            * (D1
-                            - C[0]
-                            - C[1]
-                            - C[2]
-                            - C[3]
-                            - C[4])
+                            * (
+                                    D1
+                                            - C[0]
+                                            - C[1]
+                                            - C[2]
+                                            - C[3]
+                                            - C[4]
+                            )
             );
         }
 
 
         // C7
-        //
-        // =IF(B7=0,0,
-        // TRUNC((B7/SUM(B7:B7))*(D1-SUM(C1:C6)),0))
 
         if (B[6] == 0) {
 
@@ -371,18 +366,20 @@ public class MainActivity extends Activity {
 
             C[6] = trunc(
                     ((double) B[6] / B[6])
-                            * (D1
-                            - C[0]
-                            - C[1]
-                            - C[2]
-                            - C[3]
-                            - C[4]
-                            - C[5])
+                            * (
+                                    D1
+                                            - C[0]
+                                            - C[1]
+                                            - C[2]
+                                            - C[3]
+                                            - C[4]
+                                            - C[5]
+                            )
             );
         }
 
 
-        // Display C1:C7
+        // Show C1:C7
 
         for (int i = 0; i < 7; i++) {
 
@@ -390,43 +387,52 @@ public class MainActivity extends Activity {
                     String.valueOf(C[i])
             );
         }
+
+
+        // F1 = SUM(C1:C7)
+
+        int totalMablagh = 0;
+
+        for (int value : C) {
+            totalMablagh += value;
+        }
+
+        f1.setText(
+                String.valueOf(totalMablagh)
+        );
     }
 
 
     private void resetValues() {
 
-        // Player cells become empty again
+        // Clear Player
 
         for (EditText player : players) {
-
             player.setText("");
         }
 
 
-        // Manfi cells become empty again
+        // Clear Manfi
 
         for (EditText value : b) {
-
             value.setText("");
         }
 
 
-        // D1 becomes empty
+        // Clear D1
 
         d1.setText("");
 
 
-        // C1:C7 = 0
+        // Reset outputs
 
         for (TextView value : c) {
-
             value.setText("0");
         }
 
-
-        // E1 = 0
-
         e1.setText("0");
+
+        f1.setText("0");
     }
 
 
@@ -436,7 +442,10 @@ public class MainActivity extends Activity {
 
         preferences
                 .edit()
-                .putBoolean("dark_mode", darkMode)
+                .putBoolean(
+                        "dark_mode",
+                        darkMode
+                )
                 .apply();
 
         applyTheme();
@@ -446,112 +455,93 @@ public class MainActivity extends Activity {
     private void applyTheme() {
 
         int backgroundColor;
-        int textColor;
-        int hintColor;
+        int primaryTextColor;
+        int secondaryTextColor;
         int cellColor;
+        int alternateCellColor;
         int borderColor;
+        int cardColor;
 
 
         if (darkMode) {
 
-            backgroundColor = Color.rgb(25, 25, 25);
-            textColor = Color.WHITE;
-            hintColor = Color.rgb(170, 170, 170);
-            cellColor = Color.rgb(40, 40, 40);
-            borderColor = Color.rgb(100, 100, 100);
+            backgroundColor =
+                    Color.rgb(7, 14, 29);
+
+            primaryTextColor =
+                    Color.rgb(245, 247, 255);
+
+            secondaryTextColor =
+                    Color.rgb(145, 153, 178);
+
+            cellColor =
+                    Color.rgb(25, 34, 56);
+
+            alternateCellColor =
+                    Color.rgb(30, 41, 67);
+
+            borderColor =
+                    Color.rgb(55, 67, 92);
+
+            cardColor =
+                    Color.rgb(29, 42, 68);
 
             themeButton.setText("☀");
 
         } else {
 
-            backgroundColor = Color.WHITE;
-            textColor = Color.BLACK;
-            hintColor = Color.rgb(120, 120, 120);
-            cellColor = Color.WHITE;
-            borderColor = Color.rgb(80, 80, 80);
+            backgroundColor =
+                    Color.rgb(245, 247, 252);
+
+            primaryTextColor =
+                    Color.rgb(25, 30, 45);
+
+            secondaryTextColor =
+                    Color.rgb(105, 112, 130);
+
+            cellColor =
+                    Color.WHITE;
+
+            alternateCellColor =
+                    Color.rgb(244, 246, 250);
+
+            borderColor =
+                    Color.rgb(210, 215, 225);
+
+            cardColor =
+                    Color.WHITE;
 
             themeButton.setText("☾");
         }
 
+
+        // Main background
 
         mainLayout.setBackgroundColor(
                 backgroundColor
         );
 
 
+        // Title
+
         tabTitle.setTextColor(
-                textColor
+                primaryTextColor
         );
 
 
-        // Apply to all Player cells
+        // Table
 
-        for (EditText player : players) {
-
-            player.setTextColor(textColor);
-            player.setHintTextColor(hintColor);
-            player.setBackground(
-                    createCellBackground(
-                            cellColor,
-                            borderColor
-                    )
-            );
-        }
-
-
-        // Apply to Manfi cells
-
-        for (EditText value : b) {
-
-            value.setTextColor(textColor);
-            value.setHintTextColor(hintColor);
-            value.setBackground(
-                    createCellBackground(
-                            cellColor,
-                            borderColor
-                    )
-            );
-        }
-
-
-        // Apply to Mablagh cells
-
-        for (TextView value : c) {
-
-            value.setTextColor(textColor);
-            value.setBackground(
-                    createCellBackground(
-                            cellColor,
-                            borderColor
-                    )
-            );
-        }
-
-
-        // D1
-
-        d1.setTextColor(textColor);
-        d1.setHintTextColor(hintColor);
-        d1.setBackground(
-                createCellBackground(
+        tableContainer.setBackground(
+                createRoundedBackground(
                         cellColor,
-                        borderColor
+                        borderColor,
+                        28,
+                        2
                 )
         );
 
 
-        // E1
-
-        e1.setTextColor(textColor);
-        e1.setBackground(
-                createCellBackground(
-                        cellColor,
-                        borderColor
-                )
-        );
-
-
-        // Table headers
+        // Headers
 
         TextView headerPlayer =
                 findViewById(R.id.headerPlayer);
@@ -572,63 +562,176 @@ public class MainActivity extends Activity {
 
         for (TextView header : headers) {
 
-            header.setTextColor(textColor);
+            header.setTextColor(Color.WHITE);
 
             header.setBackground(
-                    createCellBackground(
-                            cellColor,
-                            borderColor
+                    createRoundedBackground(
+                            Color.rgb(40, 100, 232),
+                            Color.rgb(45, 112, 245),
+                            0,
+                            1
                     )
             );
         }
 
 
-        // Other labels
+        // Player cells
 
-        ViewGroup root =
-                findViewById(R.id.mainLayout);
+        for (int i = 0; i < 7; i++) {
 
-        updateLabels(
-                root,
-                textColor
+            players[i].setTextColor(
+                    primaryTextColor
+            );
+
+            players[i].setHintTextColor(
+                    secondaryTextColor
+            );
+
+            players[i].setBackground(
+                    createRoundedBackground(
+                            i % 2 == 0
+                                    ? cellColor
+                                    : alternateCellColor,
+                            borderColor,
+                            0,
+                            1
+                    )
+            );
+        }
+
+
+        // Manfi cells
+
+        for (int i = 0; i < 7; i++) {
+
+            b[i].setTextColor(
+                    primaryTextColor
+            );
+
+            b[i].setHintTextColor(
+                    secondaryTextColor
+            );
+
+            b[i].setBackground(
+                    createRoundedBackground(
+                            i % 2 == 0
+                                    ? cellColor
+                                    : alternateCellColor,
+                            borderColor,
+                            0,
+                            1
+                    )
+            );
+        }
+
+
+        // Mablagh cells
+
+        for (int i = 0; i < 7; i++) {
+
+            c[i].setTextColor(
+                    primaryTextColor
+            );
+
+            c[i].setBackground(
+                    createRoundedBackground(
+                            i % 2 == 0
+                                    ? cellColor
+                                    : alternateCellColor,
+                            borderColor,
+                            0,
+                            1
+                    )
+            );
+        }
+
+
+        // D1
+
+        d1.setTextColor(
+                primaryTextColor
+        );
+
+        d1.setHintTextColor(
+                secondaryTextColor
+        );
+
+
+        // E1
+
+        e1.setTextColor(
+                primaryTextColor
+        );
+
+
+        // F1
+
+        f1.setTextColor(
+                primaryTextColor
+        );
+
+
+        // D1 Card
+
+        d1Card.setBackground(
+                createRoundedBackground(
+                        cardColor,
+                        Color.rgb(45, 110, 240),
+                        26,
+                        2
+                )
+        );
+
+
+        // E1 Card
+
+        e1Card.setBackground(
+                createRoundedBackground(
+                        cardColor,
+                        borderColor,
+                        26,
+                        2
+                )
+        );
+
+
+        // F1 Card
+
+        f1Card.setBackground(
+                createRoundedBackground(
+                        cardColor,
+                        borderColor,
+                        26,
+                        2
+                )
+        );
+
+
+        // D1 input border
+
+        d1.setBackground(
+                createRoundedBackground(
+                        cardColor,
+                        Color.rgb(45, 110, 240),
+                        18,
+                        1
+                )
+        );
+
+
+        // Theme button
+
+        themeButton.setTextColor(
+                primaryTextColor
         );
     }
 
 
-    private void updateLabels(
-            ViewGroup parent,
-            int textColor) {
-
-        for (int i = 0;
-             i < parent.getChildCount();
-             i++) {
-
-            View child =
-                    parent.getChildAt(i);
-
-            if (child instanceof TextView
-                    && !(child instanceof EditText)
-                    && child != tabTitle) {
-
-                ((TextView) child)
-                        .setTextColor(textColor);
-            }
-
-
-            if (child instanceof ViewGroup) {
-
-                updateLabels(
-                        (ViewGroup) child,
-                        textColor
-                );
-            }
-        }
-    }
-
-
-    private GradientDrawable createCellBackground(
+    private GradientDrawable createRoundedBackground(
             int backgroundColor,
-            int borderColor) {
+            int borderColor,
+            float radius,
+            int strokeWidth) {
 
         GradientDrawable drawable =
                 new GradientDrawable();
@@ -637,17 +740,15 @@ public class MainActivity extends Activity {
                 backgroundColor
         );
 
+        drawable.setCornerRadius(
+                radius
+        );
+
         drawable.setStroke(
-                1,
+                strokeWidth,
                 borderColor
         );
 
         return drawable;
-    }
-
-
-    private void createTableBorders() {
-
-        // Borders are applied by applyTheme()
     }
 }
