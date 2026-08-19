@@ -384,120 +384,155 @@
         </LinearLayout>
 
 
-        <!-- D1 AND E1 -->
+        <!-- BOTTOM CARDS -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
+            android:orientation="vertical">
 
 
-            <!-- D1 -->
+            <!-- TOP ROW -->
 
             <LinearLayout
-                android:id="@+id/d1Card"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="6dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="10dp">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="پول دستگاه ها"
-                    android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/d1"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                <!-- D1 -->
+
+                <LinearLayout
+                    android:id="@+id/d1Card"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    android:textSize="28sp" />
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="پول دستگاه ها"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/d1"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:gravity="center"
+                        android:hint="0"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="28sp" />
+
+                </LinearLayout>
+
+
+                <!-- E1 -->
+
+                <LinearLayout
+                    android:id="@+id/e1Card"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="جمع منفی ها"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/e1"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textSize="28sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
 
-            <!-- E1 -->
+            <!-- BOTTOM ROW -->
 
             <LinearLayout
-                android:id="@+id/e1Card"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="جمع منفی ها"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/e1"
-                    android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                <!-- RESET -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
                     android:gravity="center"
-                    android:text="0"
-                    android:textSize="28sp" />
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/resetButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="RESET"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+
+                <!-- F1 -->
+
+                <LinearLayout
+                    android:id="@+id/f1Card"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="جمع مبلغ ها"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/f1"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textSize="28sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
 
-        <!-- F1 -->
-
-        <LinearLayout
-            android:id="@+id/f1Card"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="145dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="جمع مبلغ ها"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/f1"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:gravity="center"
-                android:text="0"
-                android:textSize="30sp" />
-
-        </LinearLayout>
-
-
-        <!-- RESET -->
-
-        <Button
-            android:id="@+id/resetButton"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="12dp"
-            android:text="RESET"
-            android:textSize="14sp" />
+            android:layout_height="12dp" />
 
     </LinearLayout>
 
