@@ -8,8 +8,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -134,6 +132,7 @@ public class MainActivity extends Activity {
                     int after) {
             }
 
+
             @Override
             public void onTextChanged(
                     CharSequence s,
@@ -143,6 +142,7 @@ public class MainActivity extends Activity {
 
                 calculate();
             }
+
 
             @Override
             public void afterTextChanged(
@@ -181,14 +181,18 @@ public class MainActivity extends Activity {
         }
 
         try {
+
             return Integer.parseInt(value);
+
         } catch (NumberFormatException e) {
+
             return 0;
         }
     }
 
 
     private int trunc(double value) {
+
         return (int) value;
     }
 
@@ -197,7 +201,9 @@ public class MainActivity extends Activity {
 
         int[] B = new int[7];
 
+
         for (int i = 0; i < 7; i++) {
+
             B[i] = getNumber(b[i]);
         }
 
@@ -209,11 +215,16 @@ public class MainActivity extends Activity {
 
         int E1 = 0;
 
+
         for (int value : B) {
+
             E1 += value;
         }
 
-        e1.setText(String.valueOf(E1));
+
+        e1.setText(
+                String.valueOf(E1)
+        );
 
 
         int[] C = new int[7];
@@ -236,12 +247,13 @@ public class MainActivity extends Activity {
         // C2
 
         int sumB2B7 =
-                B[1] +
-                B[2] +
-                B[3] +
-                B[4] +
-                B[5] +
-                B[6];
+                B[1]
+                        + B[2]
+                        + B[3]
+                        + B[4]
+                        + B[5]
+                        + B[6];
+
 
         if (B[1] == 0 || sumB2B7 == 0) {
 
@@ -259,11 +271,12 @@ public class MainActivity extends Activity {
         // C3
 
         int sumB3B7 =
-                B[2] +
-                B[3] +
-                B[4] +
-                B[5] +
-                B[6];
+                B[2]
+                        + B[3]
+                        + B[4]
+                        + B[5]
+                        + B[6];
+
 
         if (B[2] == 0 || sumB3B7 == 0) {
 
@@ -273,7 +286,11 @@ public class MainActivity extends Activity {
 
             C[2] = trunc(
                     ((double) B[2] / sumB3B7)
-                            * (D1 - C[0] - C[1])
+                            * (
+                            D1
+                                    - C[0]
+                                    - C[1]
+                    )
             );
         }
 
@@ -281,10 +298,11 @@ public class MainActivity extends Activity {
         // C4
 
         int sumB4B7 =
-                B[3] +
-                B[4] +
-                B[5] +
-                B[6];
+                B[3]
+                        + B[4]
+                        + B[5]
+                        + B[6];
+
 
         if (B[3] == 0 || sumB4B7 == 0) {
 
@@ -295,11 +313,11 @@ public class MainActivity extends Activity {
             C[3] = trunc(
                     ((double) B[3] / sumB4B7)
                             * (
-                                    D1
-                                            - C[0]
-                                            - C[1]
-                                            - C[2]
-                            )
+                            D1
+                                    - C[0]
+                                    - C[1]
+                                    - C[2]
+                    )
             );
         }
 
@@ -307,9 +325,10 @@ public class MainActivity extends Activity {
         // C5
 
         int sumB5B7 =
-                B[4] +
-                B[5] +
-                B[6];
+                B[4]
+                        + B[5]
+                        + B[6];
+
 
         if (B[4] == 0 || sumB5B7 == 0) {
 
@@ -320,12 +339,12 @@ public class MainActivity extends Activity {
             C[4] = trunc(
                     ((double) B[4] / sumB5B7)
                             * (
-                                    D1
-                                            - C[0]
-                                            - C[1]
-                                            - C[2]
-                                            - C[3]
-                            )
+                            D1
+                                    - C[0]
+                                    - C[1]
+                                    - C[2]
+                                    - C[3]
+                    )
             );
         }
 
@@ -333,8 +352,9 @@ public class MainActivity extends Activity {
         // C6
 
         int sumB6B7 =
-                B[5] +
-                B[6];
+                B[5]
+                        + B[6];
+
 
         if (B[5] == 0 || sumB6B7 == 0) {
 
@@ -345,13 +365,13 @@ public class MainActivity extends Activity {
             C[5] = trunc(
                     ((double) B[5] / sumB6B7)
                             * (
-                                    D1
-                                            - C[0]
-                                            - C[1]
-                                            - C[2]
-                                            - C[3]
-                                            - C[4]
-                            )
+                            D1
+                                    - C[0]
+                                    - C[1]
+                                    - C[2]
+                                    - C[3]
+                                    - C[4]
+                    )
             );
         }
 
@@ -367,14 +387,14 @@ public class MainActivity extends Activity {
             C[6] = trunc(
                     ((double) B[6] / B[6])
                             * (
-                                    D1
-                                            - C[0]
-                                            - C[1]
-                                            - C[2]
-                                            - C[3]
-                                            - C[4]
-                                            - C[5]
-                            )
+                            D1
+                                    - C[0]
+                                    - C[1]
+                                    - C[2]
+                                    - C[3]
+                                    - C[4]
+                                    - C[5]
+                    )
             );
         }
 
@@ -393,9 +413,12 @@ public class MainActivity extends Activity {
 
         int totalMablagh = 0;
 
+
         for (int value : C) {
+
             totalMablagh += value;
         }
+
 
         f1.setText(
                 String.valueOf(totalMablagh)
@@ -408,6 +431,7 @@ public class MainActivity extends Activity {
         // Clear Player
 
         for (EditText player : players) {
+
             player.setText("");
         }
 
@@ -415,6 +439,7 @@ public class MainActivity extends Activity {
         // Clear Manfi
 
         for (EditText value : b) {
+
             value.setText("");
         }
 
@@ -427,8 +452,10 @@ public class MainActivity extends Activity {
         // Reset outputs
 
         for (TextView value : c) {
+
             value.setText("0");
         }
+
 
         e1.setText("0");
 
@@ -440,6 +467,7 @@ public class MainActivity extends Activity {
 
         darkMode = !darkMode;
 
+
         preferences
                 .edit()
                 .putBoolean(
@@ -447,6 +475,7 @@ public class MainActivity extends Activity {
                         darkMode
                 )
                 .apply();
+
 
         applyTheme();
     }
@@ -461,6 +490,7 @@ public class MainActivity extends Activity {
         int alternateCellColor;
         int borderColor;
         int cardColor;
+        int titleColor;
 
 
         if (darkMode) {
@@ -485,6 +515,9 @@ public class MainActivity extends Activity {
 
             cardColor =
                     Color.rgb(29, 42, 68);
+
+            titleColor =
+                    Color.rgb(105, 220, 145);
 
             themeButton.setText("☀");
 
@@ -511,6 +544,9 @@ public class MainActivity extends Activity {
             cardColor =
                     Color.WHITE;
 
+            titleColor =
+                    Color.rgb(20, 115, 65);
+
             themeButton.setText("☾");
         }
 
@@ -522,7 +558,7 @@ public class MainActivity extends Activity {
         );
 
 
-        // Title
+        // Main title
 
         tabTitle.setTextColor(
                 primaryTextColor
@@ -541,7 +577,7 @@ public class MainActivity extends Activity {
         );
 
 
-        // Headers
+        // Table headers
 
         TextView headerPlayer =
                 findViewById(R.id.headerPlayer);
@@ -562,7 +598,9 @@ public class MainActivity extends Activity {
 
         for (TextView header : headers) {
 
-            header.setTextColor(Color.WHITE);
+            header.setTextColor(
+                    Color.WHITE
+            );
 
             header.setBackground(
                     createRoundedBackground(
@@ -646,6 +684,31 @@ public class MainActivity extends Activity {
         }
 
 
+        // Titles
+
+        TextView d1Title =
+                (TextView) d1Card.getChildAt(0);
+
+        TextView e1Title =
+                (TextView) e1Card.getChildAt(0);
+
+        TextView f1Title =
+                (TextView) f1Card.getChildAt(0);
+
+
+        d1Title.setTextColor(
+                titleColor
+        );
+
+        e1Title.setTextColor(
+                titleColor
+        );
+
+        f1Title.setTextColor(
+                titleColor
+        );
+
+
         // D1
 
         d1.setTextColor(
@@ -707,7 +770,7 @@ public class MainActivity extends Activity {
         );
 
 
-        // D1 input border
+        // D1 input
 
         d1.setBackground(
                 createRoundedBackground(
