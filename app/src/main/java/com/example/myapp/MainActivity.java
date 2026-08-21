@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class MainActivity extends Activity {
 
     EditText[] players = new EditText[7];
@@ -152,8 +154,10 @@ public class MainActivity extends Activity {
 
 
         for (EditText item : b) {
+
             item.addTextChangedListener(watcher);
         }
+
 
         d1.addTextChangedListener(watcher);
 
@@ -177,8 +181,10 @@ public class MainActivity extends Activity {
                 .trim();
 
         if (value.isEmpty()) {
+
             return 0;
         }
+
 
         try {
 
@@ -409,19 +415,30 @@ public class MainActivity extends Activity {
         }
 
 
-        // F1 = SUM(C1:C7)
+        /*
+         * F1 = D1 / E1
+         *
+         * هر منفی = پول دستگاه ها / جمع منفی ها
+         *
+         * Result is displayed with 2 decimal places.
+         */
 
-        int totalMablagh = 0;
+        double harManfi = 0.0;
 
 
-        for (int value : C) {
+        if (E1 != 0) {
 
-            totalMablagh += value;
+            harManfi =
+                    (double) D1 / E1;
         }
 
 
         f1.setText(
-                String.valueOf(totalMablagh)
+                String.format(
+                        Locale.US,
+                        "%.2f",
+                        harManfi
+                )
         );
     }
 
@@ -459,7 +476,7 @@ public class MainActivity extends Activity {
 
         e1.setText("0");
 
-        f1.setText("0");
+        f1.setText("0.00");
     }
 
 
