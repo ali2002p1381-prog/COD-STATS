@@ -496,7 +496,7 @@
                 </LinearLayout>
 
 
-                <!-- F1 -->
+                <!-- F1 = هر منفی -->
 
                 <LinearLayout
                     android:id="@+id/f1Card"
@@ -512,7 +512,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="جمع مبلغ ها"
+                        android:text="هر منفی"
                         android:textSize="18sp" />
 
                     <TextView
@@ -520,7 +520,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="65dp"
                         android:gravity="center"
-                        android:text="0"
+                        android:text="0.00"
                         android:textSize="28sp" />
 
                 </LinearLayout>
